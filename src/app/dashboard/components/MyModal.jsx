@@ -1,8 +1,8 @@
 export default function MyModal(props) {
   return (
     <>
-      <div className="modal" tabIndex="-1" role="dialog" id={props.id}>
-        <div className="modal-dialog" role="document">
+      <div className="modal fade" tabIndex="-1" role="dialog" id={props.id}>
+        <div className="modal-dialog modal-lg modal-dialog-scrollable" role="document">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">{props.title}</h5>

@@ -15,20 +15,20 @@ export default function DashboardLayout({ children }) {
         <Footer />
         <ControlSidebar />
       </div>
-      <Script src="/plugins/jquery/jquery.min.js"></Script>
-      <Script src="/plugins/jquery-ui/jquery-ui.min.js"></Script>
-      <Script src="/plugins/jqvmap/jquery.vmap.min.js"></Script>
-      <Script src="/plugins/jqvmap/maps/jquery.vmap.usa.js"></Script>
-      <Script src="/plugins/jquery-knob/jquery.knob.min.js"></Script>
-      <Script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></Script>
-      <Script src="/plugins/chart.js/Chart.min.js"></Script>
-      <Script src="/plugins/sparklines/sparkline.js"></Script>
-      <Script src="/plugins/moment/moment.min.js"></Script> {/* โหลด moment.js ก่อน */}
-      <Script src="/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></Script> {/* โหลด tempusdominus-bootstrap-4.js หลัง */}
-      <Script src="/plugins/daterangepicker/daterangepicker.js"></Script>
-      <Script src="/plugins/summernote/summernote-bs4.min.js"></Script>
-      <Script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></Script>
-      <Script src="/dist/js/adminlte.js"></Script>
+      <Script src="/plugins/jquery/jquery.min.js" />
+      <Script src="/plugins/jquery-ui/jquery-ui.min.js" />
+      <Script src="/plugins/jqvmap/jquery.vmap.min.js" />
+      <Script src="/plugins/jqvmap/maps/jquery.vmap.usa.js" />
+      <Script src="/plugins/jquery-knob/jquery.knob.min.js" />
+      <Script src="/plugins/bootstrap/js/bootstrap.bundle.min.js" />
+      <Script src="/plugins/chart.js/Chart.min.js" />
+      <Script src="/plugins/sparklines/sparkline.js" />
+      <Script src="/plugins/moment/moment.min.js" />
+      <Script src="/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js" />
+      <Script src="/plugins/daterangepicker/daterangepicker.js" />
+      <Script src="/plugins/summernote/summernote-bs4.min.js" />
+      <Script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js" />
+      <Script src="/dist/js/adminlte.js" />
     </div>
   );
 }
