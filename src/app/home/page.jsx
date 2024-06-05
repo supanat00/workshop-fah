@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react"
 import Swal from "sweetalert2";
 import axios from "axios";
-import MyModal from "./components/MyModal.jsx";
+import MyModal from "./components/MyModal";
 import dayjs from "dayjs";
 
 export default function Page() {
