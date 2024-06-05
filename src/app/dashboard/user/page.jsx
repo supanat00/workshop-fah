@@ -117,7 +117,7 @@ export default function UserManagement() {
       <table className="table table-bordered table-hover mt-3">
         <thead className="bg-gray">
           <tr>
-            <th>ชื่อผู้ใช้</th>
+            <th>ชื่อคน</th>
             <th>อีเมล์</th>
             <th>บทบาท</th>
             <th width='140px'>การกระทำ</th>
