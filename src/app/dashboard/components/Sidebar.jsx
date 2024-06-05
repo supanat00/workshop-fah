@@ -1,11 +1,14 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 import Link from "next/link";
+import axios from "axios";
 
 export default function Sidebar() {
+  const [productCount, setProductCount] = useState(0);
+  const [billSaleCount, setBiilSaleCount] = useState(0)
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -14,6 +17,45 @@ export default function Sidebar() {
       router.push("/signin");
     }
   }, [router, status]);
+
+  useEffect(() => {
+    fetchProductCount();
+    fetchBillSaleCount();
+  }, []);
+
+  const fetchProductCount = async () => {
+    try {
+      const res = await axios.get("/api/product/count", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      setProductCount(res.data.count);
+    } catch (err) {
+      Swal.fire({
+        title: "error",
+        text: err.message,
+        icon: "error",
+      });
+    }
+  };
+
+  const fetchBillSaleCount = async () => {
+    try {
+      const res = await axios.get('/api/sale/count', {
+        headers: { "Content-Type": "application/json" }
+      })
+      if (res.data.count !== undefined) {
+        setBiilSaleCount(res.data.count)
+      }
+    } catch (err) {
+      Swal.fire({
+        title: 'error',
+        text: err.message,
+        icon: 'error'
+      })
+    }
+  }
 
   return (
     status === "authenticated" &&
@@ -91,19 +133,26 @@ export default function Sidebar() {
                     <i className="nav-icon fa fa-box" />
                     <p>
                       สินค้า
-                      <span className="badge badge-info right">2</span>
+                      <span className="badge badge-info right">
+                        {productCount}
+                      </span>
                     </p>
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link href="/dashboard/billSale" className="nav-link">
                     <i className="nav-icon fa fa-list" />
-                    <p>รายงานยอดขาย</p>
+                    <p>
+                      รายงานยอดขาย
+                      <span className="badge badge-info right">
+                        {billSaleCount}
+                      </span>
+                    </p>
                   </Link>
-                </li>   
+                </li>
                 <li className="nav-item">
                   <Link href="/dashboard/user" className="nav-link">
-                    <i className="nav-icon fas fa-columns" />
+                    <i class="nav-icon fa fa-user" aria-hidden="true"></i>
                     <p>จัดการผู้ใช้</p>
                   </Link>
                 </li>

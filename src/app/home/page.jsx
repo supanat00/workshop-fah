@@ -1,12 +1,14 @@
 "use client"
 
 import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react"
 import Swal from "sweetalert2";
 import axios from "axios";
 import MyModal from "./components/MyModal.jsx";
 import dayjs from "dayjs";
 
 export default function Page() {
+  const { data: session } = useSession();
   const [products, setProducts] = useState([]);
   const [carts, setCarts] = useState([]);
   const [recordInCarts, setRecordInCarts] = useState(0);
@@ -18,10 +20,12 @@ export default function Page() {
   const [payDate, setPayDate] = useState(dayjs(new Date()).format("YYYY-MM-DD"));
   const [payTime, setPayTime] = useState("");
 
+  const userId = session?.user?.id
+
   useEffect(() => {
     fetchProductData();
     fetchDataFromLocal();
-  }, []);
+  }, [userId]);
 
   const fetchProductData = async () => {
     try {
@@ -51,12 +55,12 @@ export default function Page() {
     arr.push(item);
     setCarts(arr);
     setRecordInCarts(arr.length);
-    localStorage.setItem("carts", JSON.stringify(arr));
+    localStorage.setItem(`carts_${userId}`, JSON.stringify(arr));
     fetchDataFromLocal();
   };
 
   const fetchDataFromLocal = () => {
-    const itemInCarts = JSON.parse(localStorage.getItem("carts"));
+    const itemInCarts = JSON.parse(localStorage.getItem(`carts_${userId}`));
     if (itemInCarts !== null) {
       setCarts(itemInCarts);
       setRecordInCarts(itemInCarts.length);
@@ -91,7 +95,7 @@ export default function Page() {
         let arr = carts.filter((cartItem) => cartItem.id !== item.id);
         setCarts(arr);
         setRecordInCarts(arr.length);
-        localStorage.setItem("carts", JSON.stringify(arr));
+        localStorage.setItem(`carts_${userId}`, JSON.stringify(arr));
         computePriceAndQty(arr);
       }
     } catch (err) {
@@ -126,7 +130,7 @@ export default function Page() {
       const res = await axios.post("/api/sale/save", payload);
 
       if (res.data.message === "success") {
-        localStorage.removeItem("carts");
+        localStorage.removeItem(`carts_${userId}`);
         setRecordInCarts(0);
         setCarts([]);
         setCustomerName("");
