@@ -206,7 +206,7 @@ export default function Page() {
                     <td>{sale.customerName}</td>
                     <td>{sale.customerPhone}</td>
                     <td>{sale.customerAddress}</td>
-                    <td>{dayjs(sale.payDate).format("YYYY/MM/DD")}</td>
+                    <td>{dayjs(sale.payDate).format("DD/MM/YYYY")}</td>
                     <td>{sale.payTime}</td>
                     <td>{displayStatusText(sale)}</td>
                     <td className="text-center">

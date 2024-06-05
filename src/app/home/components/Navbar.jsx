@@ -74,8 +74,8 @@ export default function Navbar() {
                           icon: "question",
                           showCancelButton: true,
                           confirmButtonText: "Sign Out",
-                        }).then((result) => {
-                          if (result.isConfirmed) {
+                        }).then((willSignOut) => {
+                          if (willSignOut.isConfirmed) {
                             signOut({ callbackUrl: "/home" });
                           }
                         });

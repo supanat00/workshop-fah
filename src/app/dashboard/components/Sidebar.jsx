@@ -91,15 +91,16 @@ export default function Sidebar() {
                       title: "Sign Out",
                       text: "Are you sure you want to sign out?",
                       icon: "question",
-                      buttons: ["Cancel", "Sign Out"],
+                      showCancelButton: true,
+                      confirmButtonText: 'Sign Out',
                       dangerMode: true,
                     }).then((willSignOut) => {
-                      if (willSignOut) {
+                      if (willSignOut.isConfirmed) {
                         signOut({ callbackUrl: "/signin" });
                       }
                     });
                   }}
-                  className="btn btn-danger m-3"
+                  className="btn btn-outline-danger m-3"
                 >
                   <i className="fa fa-times mr-2"></i> Sign Out
                 </button>
