@@ -187,8 +187,8 @@ export default function Page() {
           <div className="card-title">รายงานยอดขาย</div>
         </div>
         <div className="card-body">
-          <table className="table table-bordered table-striped">
-            <thead>
+          <table className="table table-bordered table-hover">
+          <thead className="bg-gray">
               <tr>
                 <th>ลูกค้า</th>
                 <th>เบอร์โทร</th>

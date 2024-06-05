@@ -114,8 +114,8 @@ export default function UserManagement() {
           ค้นหา
         </button>
       </div>
-      <table className="table table-bordered table-striped mt-3">
-        <thead>
+      <table className="table table-bordered table-hover mt-3">
+        <thead className="bg-gray">
           <tr>
             <th>ชื่อผู้ใช้</th>
             <th>อีเมล์</th>

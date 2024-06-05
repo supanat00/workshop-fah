@@ -292,29 +292,13 @@ export default function Page() {
         confirmButtonText: "Yes, delete it!",
         cancelButtonText: "No, cancel!",
       });
-  
+
       if (button.isConfirmed) {
         if (selectedTrashItems.length === 0) {
-        const res = await axios.delete(`/api/product/removeReal/${item.id}`, {
-          headers: { "Content-Type": "application/json" },
-        });
-  
-        if (res.data.message === "success") {
-          Swal.fire({
-            title: "ลบสำเร็จ",
-            text: "ลบสินค้าเรียบร้อย",
-            icon: "success",
-            timer: 1000,
-          });
-  
-          fetchProductDelete();
-        }
-      } else {
-        for (const itemId of selectedTrashItems) {
-          const res = await axios.delete(`/api/product/removeReal/${itemId}`, {
+          const res = await axios.delete(`/api/product/removeReal/${item.id}`, {
             headers: { "Content-Type": "application/json" },
           });
-    
+
           if (res.data.message === "success") {
             Swal.fire({
               title: "ลบสำเร็จ",
@@ -322,11 +306,31 @@ export default function Page() {
               icon: "success",
               timer: 1000,
             });
-    
+
             fetchProductDelete();
-          }}
+          }
+        } else {
+          for (const itemId of selectedTrashItems) {
+            const res = await axios.delete(
+              `/api/product/removeReal/${itemId}`,
+              {
+                headers: { "Content-Type": "application/json" },
+              }
+            );
+
+            if (res.data.message === "success") {
+              Swal.fire({
+                title: "ลบสำเร็จ",
+                text: "ลบสินค้าเรียบร้อย",
+                icon: "success",
+                timer: 1000,
+              });
+
+              fetchProductDelete();
+            }
+          }
+        }
       }
-    }
     } catch (err) {
       Swal.fire({
         title: "Error",
@@ -335,9 +339,6 @@ export default function Page() {
       });
     }
   };
-  
-
-
 
   return (
     <>
@@ -353,17 +354,17 @@ export default function Page() {
         </button>
 
         <button
-          className="btn btn-secondary ml-2"
+          className="btn btn-outline-danger ml-2"
           data-toggle="modal"
           data-target="#modalTrash"
         >
-          <i class="fa fa-trash mr-2" aria-hidden="true"></i>
+          <i className="fa fa-trash mr-2" aria-hidden="true"></i>
           ถังขยะ ({productTrash.length})
         </button>
       </div>
 
-      <table className="table">
-        <thead>
+      <table className="table table-hover table-bordered">
+        <thead className="bg-gray">
           <tr>
             <th scope="col">ภาพสินค้า</th>
             <th scope="col">name</th>

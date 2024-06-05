@@ -152,7 +152,7 @@ export default function Sidebar() {
                 </li>
                 <li className="nav-item">
                   <Link href="/dashboard/user" className="nav-link">
-                    <i class="nav-icon fa fa-user" aria-hidden="true"></i>
+                    <i className="nav-icon fa fa-user" aria-hidden="true"></i>
                     <p>จัดการผู้ใช้</p>
                   </Link>
                 </li>
