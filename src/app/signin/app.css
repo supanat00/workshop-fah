@@ -1,4 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
-@import '/plugins/fontawesome-free/css/all.min.css';
-@import '/plugins/icheck-bootstrap/icheck-bootstrap.min.css';
-@import '/dist/css/adminlte.min.css';
+@import '../../../public/plugins/fontawesome-free/css/all.min.css';
+@import '../../../public/bootstrap-5.3.3-dist/css/bootstrap.min.css';
+
+.divider:after,
+.divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+.h-custom {
+  height: calc(100% - 73px);
+}
+@media (max-width: 450px) {
+  .h-custom {
+    height: 100%;
+  }
+}

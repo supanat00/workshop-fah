@@ -1,123 +1,109 @@
-"use client"
+"use client";
 
-import './app.css';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import "./app.css";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useSession, signIn } from "next-auth/react";
 import Swal from "sweetalert2";
-import Script from 'next/script';
-import Link from 'next/link';
+import Script from "./script";
 
 export default function Page() {
-
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const router = useRouter()
-  const { data: session } = useSession()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+  const { data: session } = useSession();
 
   const handleSignin = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       const res = await signIn("credentials", {
         redirect: false,
         email,
-        password
-      })
+        password,
+      });
       if (res.error) {
         Swal.fire({
-          title: 'error',
+          title: "error",
           text: res.error,
-          icon: 'error'
-        })
-        return false
+          icon: "error",
+        });
+        return false;
       }
       Swal.fire({
-        title: 'success',
-        text: 'Sign in successfully',
-        icon: 'success',
-        timer: 1000
-      })
-      router.push('/home')
+        title: "success",
+        text: "Sign in successfully",
+        icon: "success",
+        timer: 1000,
+      });
+      router.push("/home");
     } catch (err) {
       Swal.fire({
-        title: 'error',
+        title: "error",
         text: err.message,
-        icon: 'error'
-      })
+        icon: "error",
+      });
     }
-  }
+  };
 
   if (session) {
-    router.push('/')
-    return null
+    router.push("/");
+    return null;
   }
 
   return (
     <>
-      <div className="hold-transition login-page">
-        <div className="login-box">
-          <div className="login-logo">
-            <Link href="/signin">
-              <b>Sign In</b> to WorkShop
-            </Link>
-          </div>
-          {/* /.login-logo */}
-          <div className="card">
-            <div className="card-body login-card-body">
-              <p className="login-box-msg">Sign in to start your session</p>
-              <form onSubmit={handleSignin}>
-                <div className="input-group mb-3">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                  />
-                  <div className="input-group-append">
-                    <div className="input-group-text">
-                      <span className="fas fa-envelope" />
-                    </div>
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-5 col-md-8 col-10 mt-5">
+            <div className="card shadow-lg">
+              <div className="card-body">
+                <h3 className="card-title text-center mb-4">Sign In</h3>
+                <form>
+                  <div className="mb-3">
+                    <label htmlFor="email" className="form-label">
+                      Email address
+                    </label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      required
+                    />
                   </div>
-                </div>
-                <div className="input-group mb-3">
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                  />
-                  <div className="input-group-append">
-                    <div className="input-group-text">
-                      <span className="fas fa-lock" />
-                    </div>
+                  <div className="mb-3">
+                    <label htmlFor="password" className="form-label">
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="password"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={e => setPassword(e.target.value)}
+                      required
+                    />
                   </div>
-                </div>
-                <div className="row">
-                  {/* /.col */}
-                  <div className="col-4">
-                    <button type="submit" className="btn btn-primary btn-block">
-                      Sign In
+                  <div className="d-grid">
+                    <button type="submit" className="btn btn-primary" onClick={handleSignin}>
+                      Login
                     </button>
                   </div>
-                  {/* /.col */}
-                </div>
-              </form>
-              <p className="mt-4">
-                <Link href="/signup" className="text-center">
-                  Register a new membership
-                </Link>
-              </p>
+                  <div className="mt-3 text-center">
+                    <p>
+                      Don't have an account? <a href="/signup">Sign up</a>
+                    </p>
+                  </div>
+                </form>
+              </div>
             </div>
-            {/* /.login-card-body */}
           </div>
         </div>
-        {/* /.login-box */}
       </div>
-      <Script src="/plugins/jquery/jquery.min.js"></Script>
-      <Script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></Script>
-      <Script src="/dist/js/adminlte.js"></Script>
+      <Script />
     </>
   );
 }

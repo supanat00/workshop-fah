@@ -4,7 +4,7 @@ import "./app.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import Script from "next/script";
+import Script from "./script";
 import Link from "next/link";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -50,83 +50,72 @@ export default function Page() {
 
   return (
     <>
-      <div className="hold-transition register-page">
-        <div className="register-box">
-          <div className="register-logo">
-            <Link href="/signup">
-              <b>Sign Up</b>
-            </Link>
-          </div>
-          <div className="card">
-            <div className="card-body register-card-body">
-              <p className="login-box-msg">Register a new membership</p>
-              <form onSubmit={handleSignup}>
-                <div className="input-group mb-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Username"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                  />
-                  <div className="input-group-append">
-                    <div className="input-group-text">
-                      <span className="fas fa-user" />
-                    </div>
+      <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-5 col-md-8 col-10 mt-5">
+            <div className="card shadow-lg">
+              <div className="card-body">
+                <h3 className="card-title text-center mb-4">Sign Up</h3>
+                <form>
+                <div className="mb-3">
+                    <label htmlFor="username" className="form-label">
+                      Username
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="username"
+                      placeholder="Enter your username"
+                      value={name}
+                      onChange={e => setName(e.target.value)}
+                      required
+                    />
                   </div>
-                </div>
-                <div className="input-group mb-3">
-                  <input
-                    type="email"
-                    className="form-control"
-                    placeholder="Email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                  />
-                  <div className="input-group-append">
-                    <div className="input-group-text">
-                      <span className="fas fa-envelope" />
-                    </div>
+                  <div className="mb-3">
+                    <label htmlFor="email" className="form-label">
+                      Email address
+                    </label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      placeholder="Enter your email"
+                      value={email}
+                      onChange={e => setEmail(e.target.value)}
+                      required
+                    />
                   </div>
-                </div>
-                <div className="input-group mb-3">
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Password"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                  />
-                  <div className="input-group-append">
-                    <div className="input-group-text">
-                      <span className="fas fa-lock" />
-                    </div>
+                  <div className="mb-3">
+                    <label htmlFor="password" className="form-label">
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      id="password"
+                      placeholder="Enter your password"
+                      value={password}
+                      onChange={e => setPassword(e.target.value)}
+                      required
+                    />
                   </div>
-                </div>
-                <div className="row">
-                  {/* /.col */}
-                  <div className="col-4 mb-3">
-                    <button type="submit" className="btn btn-primary btn-block">
-                      Register
+                  <div className="d-grid">
+                    <button type="submit" className="btn btn-primary" onClick={handleSignup}>
+                      Login
                     </button>
                   </div>
-                  {/* /.col */}
-                </div>
-              </form>
-              <Link href="/signin" className="text-center">
-                I already have a membership
-              </Link>
+                  <div className="mt-3 text-center">
+                    <p>
+                      Have account ready? <a href="/signin">Sign in</a>
+                    </p>
+                  </div>
+                </form>
+              </div>
             </div>
-            {/* /.form-box */}
           </div>
-          {/* /.card */}
         </div>
-        {/* /.register-box */}
       </div>
-
-      <Script src="/plugins/jquery/jquery.min.js"></Script>
-      <Script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></Script>
-      <Script src="/dist/js/adminlte.js"></Script>
+      <Script />
     </>
   );
 }
