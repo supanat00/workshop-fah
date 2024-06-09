@@ -22,6 +22,7 @@ model User {
   role      String   @default("member")
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt()
+  image  String?
 }
 
 model Product {

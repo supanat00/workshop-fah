@@ -43,11 +43,12 @@ export default function Page() {
     if (session) {
       try {
         const productData = { ...product };
-
+        console.log(image);
         if (image) {
           const uploadedImageName = await handleUpload();
           if (uploadedImageName) {
             productData.image = uploadedImageName;
+
           } else {
             throw new Error("Image upload failed");
           }
